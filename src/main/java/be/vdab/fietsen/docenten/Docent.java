@@ -1,8 +1,6 @@
 package be.vdab.fietsen.docenten;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 
@@ -10,11 +8,24 @@ import java.math.BigDecimal;
 @Table(name = "docenten")
 public class Docent {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String voornaam ;
     private String familienaam;
     private BigDecimal wedde;
     private String emailAdres;
+    @Enumerated(EnumType.STRING)
+    private Geslacht geslacht;
+
+    public Docent( String voornaam, String familienaam, BigDecimal wedde, String emailAdres, Geslacht geslacht) {
+        this.voornaam = voornaam;
+        this.familienaam = familienaam;
+        this.wedde = wedde;
+        this.emailAdres = emailAdres;
+        this.geslacht = geslacht;
+    }
+
+    protected Docent() {}
 
     public long getId() {
         return id;
@@ -31,4 +42,6 @@ public class Docent {
     public BigDecimal getWedde() {return wedde;}
 
     public String getEmailAdres() {return emailAdres;}
+
+    public Geslacht getGeslacht() {return geslacht;}
 }
