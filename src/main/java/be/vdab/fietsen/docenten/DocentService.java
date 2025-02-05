@@ -36,4 +36,9 @@ public class DocentService {
             throw new DocentBestaatAlException();
         }
     }
+
+    @Transactional
+    void delete(long id) {
+        docentRepository.deleteById(id);
+    }
 }
