@@ -31,4 +31,14 @@ public interface DocentRepository extends JpaRepository<Docent,Long> {
    List<Docent> findByFamilienaamAndVoornaam(String familienaam, String voornaam);
 
    Optional<Docent> findByEmailAdres(String emailAdres);
+
+    int countByWedde(BigDecimal wedde);
+
+    boolean existsByEmailAdres(String emailAdres);
+
+    boolean existsByWeddeGreaterThan(BigDecimal vanaf);
+
+    void deleteByEmailAdres(String emailAdres);
+
+    void deleteByWeddeGreaterThan(BigDecimal vanaf);
 }

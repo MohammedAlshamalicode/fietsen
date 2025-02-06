@@ -54,4 +54,8 @@ public class DocentService {
     Optional<Docent>findByEmailAdres(String emailAdres) {
         return docentRepository.findByEmailAdres(emailAdres);
     }
+
+    int findAantalMetWedde(BigDecimal wedde) {
+        return docentRepository.countByWedde(wedde);
+    }
 }

@@ -61,4 +61,9 @@ class DocentController {
         return docentService.findByEmailAdres(emailAdres)
                 .orElseThrow(DocentNietGevondenException::new);
     }
+
+    @GetMapping(value="aantal", params="wedde")
+    int findAantalMetWedde(BigDecimal wedde) {
+        return docentService.findAantalMetWedde(wedde);
+    }
 }
