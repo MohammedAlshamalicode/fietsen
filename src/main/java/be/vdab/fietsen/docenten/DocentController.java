@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
@@ -90,7 +91,13 @@ class DocentController {
     @PutMapping("{id}/wedde")
     void wijzigWedde(@PathVariable long id,
                      @RequestBody @NotNull @Positive BigDecimal wedde){
-        docentService.wijzigWedde(id, wedde);
+//        docentService.wijzigWedde(id, wedde);
+        //تعديل لاستخدام optimistic locking
+        try {
+            docentService.wijzigWedde(id, wedde);
+        } catch (ObjectOptimisticLockingFailureException ex) {
+            throw new EenAndereGebruikerWijzigdeDeDocentException();
+        }
     }
 
 }

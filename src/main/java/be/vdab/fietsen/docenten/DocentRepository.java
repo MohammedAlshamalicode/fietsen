@@ -1,6 +1,8 @@
 package be.vdab.fietsen.docenten;
 
+import jakarta.persistence.LockModeType;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.Query;
 
 import javax.print.Doc;
@@ -79,6 +81,9 @@ public interface DocentRepository extends JpaRepository<Docent, Long> {
             """)
     List<AantalDocentenPerWedde> findAantalDocentenPerWedde();
 
-
+    //Pessimistic lock قفل تشاؤمي
+    @Lock(LockModeType.PESSIMISTIC_WRITE)
+    @Query("select d from Docent d where d.id = :id")
+    Optional<Docent> findAndLockById(long id);
 
 }
