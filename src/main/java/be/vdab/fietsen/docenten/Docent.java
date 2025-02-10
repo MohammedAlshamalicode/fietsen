@@ -44,4 +44,6 @@ public class Docent {
     public String getEmailAdres() {return emailAdres;}
 
     public Geslacht getGeslacht() {return geslacht;}
+
+    void setWedde(BigDecimal wedde) {this.wedde = wedde;}
 }

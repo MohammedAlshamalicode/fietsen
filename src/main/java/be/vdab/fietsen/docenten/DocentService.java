@@ -19,15 +19,24 @@ public class DocentService {
         this.docentRepository = docentRepository;
     }
 
-    long findAantal(){return docentRepository.count();}
+    long findAantal() {
+        return docentRepository.count();
+    }
 
-    List<Docent> findAll(){return docentRepository.findAll(Sort.by("familienaam"));}
+    List<Docent> findAll() {
+        return docentRepository.findAll(Sort.by("familienaam"));
+    }
 
-    Optional<Docent> findById(long id){return docentRepository.findById(id);}
+    Optional<Docent> findById(long id) {
+        return docentRepository.findById(id);
+    }
 
-    boolean existsById(long id){return docentRepository.existsById(id);}
+    boolean existsById(long id) {
+        return docentRepository.existsById(id);
+    }
 
-    @Transactional long create(NieuweDocent nieuweDocent) {
+    @Transactional
+    long create(NieuweDocent nieuweDocent) {
         try {
             var docent = new Docent(nieuweDocent.voornaam(), nieuweDocent.familienaam(),
                     nieuweDocent.wedde(), nieuweDocent.emailAdres(), nieuweDocent.geslacht());
@@ -47,11 +56,11 @@ public class DocentService {
 //        return docentRepository.findByWedde(wedde);
 //    }
 
-    List<Docent>findByWeddeOrderByFamilienaam(BigDecimal wedde) {
+    List<Docent> findByWeddeOrderByFamilienaam(BigDecimal wedde) {
         return docentRepository.findByWeddeOrderByFamilienaam(wedde);
     }
 
-    Optional<Docent>findByEmailAdres(String emailAdres) {
+    Optional<Docent> findByEmailAdres(String emailAdres) {
         return docentRepository.findByEmailAdres(emailAdres);
     }
 
@@ -66,10 +75,20 @@ public class DocentService {
     BigDecimal findGrootsteWedde() {
         return docentRepository.findGrrotsteWedde();
     }
+
     List<EnkelNaam> findNamen() {
         return docentRepository.findNamen();
     }
+
     List<AantalDocentenPerWedde> findAantalDocentenPerWedde() {
         return docentRepository.findAantalDocentenPerWedde();
+    }
+
+    //تعديل قيمة wedde
+    @Transactional
+    void wijzigWedde(long id, BigDecimal wedde) {
+        docentRepository.findById(id)
+                .orElseThrow(DocentNietGevondenException::new)
+                .setWedde(wedde);
     }
 }

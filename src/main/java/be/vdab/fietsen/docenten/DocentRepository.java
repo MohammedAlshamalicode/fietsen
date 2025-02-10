@@ -80,4 +80,5 @@ public interface DocentRepository extends JpaRepository<Docent, Long> {
     List<AantalDocentenPerWedde> findAantalDocentenPerWedde();
 
 
+
 }
