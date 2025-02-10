@@ -66,4 +66,23 @@ class DocentController {
     int findAantalMetWedde(BigDecimal wedde) {
         return docentService.findAantalMetWedde(wedde);
     }
+
+    @GetMapping("metGrootsteWedde")
+    List<Docent> findMetGrootsteWedde() {
+        return docentService.findMetGrootsteWedde();
+    }
+
+    @GetMapping("weddes/grootste")
+    BigDecimal findGrootsteWedde() {
+        return docentService.findGrootsteWedde();
+    }
+    @GetMapping("namen")
+    List<EnkelNaam> findNamen() {
+        return docentService.findNamen();
+    }
+    @GetMapping("aantalPerWedde")
+    List<AantalDocentenPerWedde> findAantalDocentenPerWedde() {
+        return docentService.findAantalDocentenPerWedde();
+    }
+
 }
