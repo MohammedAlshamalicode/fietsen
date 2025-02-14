@@ -100,4 +100,12 @@ class DocentController {
         }
     }
 
+    @PostMapping("weddeverhogingen")
+    void algemeneOpslag(@RequestBody @NotNull @Positive BigDecimal bedrag) {
+        docentService.algemeneOpslag(bedrag);
+    }
+
+
+    //ٌRecords
+    private record Opslag(@NotNull @Positive BigDecimal bedrag) {}
 }

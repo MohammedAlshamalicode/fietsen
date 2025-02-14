@@ -3,6 +3,7 @@ package be.vdab.fietsen.docenten;
 import jakarta.persistence.LockModeType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Lock;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import javax.print.Doc;
@@ -67,7 +68,7 @@ public interface DocentRepository extends JpaRepository<Docent, Long> {
     BigDecimal findGrrotsteWedde();
 
     @Query("""
-            select d.voornaam as voornaam , d. familienaam as familienaam 
+            select d.voornaam as voornaam , d. familienaam as familienaam
             from Docent d
             order by d.voornaam, d.familienaam
             """)
@@ -85,5 +86,13 @@ public interface DocentRepository extends JpaRepository<Docent, Long> {
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query("select d from Docent d where d.id = :id")
     Optional<Docent> findAndLockById(long id);
+
+    //منح جميع المدرسين زيادة في الراتب
+    @Modifying // يجب استخدامها عند تنفيذ استعلام تحديث
+    @Query("""
+            update Docent d
+            set d.wedde = d.wedde + :bedrag 
+            """)
+    void algemeneOpslag(BigDecimal bedrag);
 
 }
