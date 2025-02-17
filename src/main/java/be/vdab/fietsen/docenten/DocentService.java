@@ -96,4 +96,18 @@ public class DocentService {
     void algemeneOpslag(BigDecimal bedrag) {
         docentRepository.algemeneOpslag(bedrag);
     }
+
+    @Transactional
+    void voegBijnaamToe(long id, String bijnaam) {
+        docentRepository.findById(id)
+                .orElseThrow(DocentNietGevondenException::new)
+                .voegBijnaamToe(bijnaam);
+    }
+
+    @Transactional
+    void verwijderBijnaam(long id, String bijnaam) {
+        docentRepository.findById(id)
+                .orElseThrow(DocentNietGevondenException::new)
+                .verwijderBijnaam(bijnaam);
+    }
 }
