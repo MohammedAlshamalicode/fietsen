@@ -116,6 +116,13 @@ class DocentController {
         docentService.verwijderBijnaam(id, bijnaam);
     }
 
+    @GetMapping("{id}/emailAdres")
+    String findEmailAdresById(@PathVariable long id) {
+        return docentService.findById(id)
+                .orElseThrow(DocentNietGevondenException::new)
+                .getEmailAdres();
+    }
+
 
     //ٌRecords
     private record Opslag(@NotNull @Positive BigDecimal bedrag) {}

@@ -22,7 +22,7 @@ public class Docent {
     private Geslacht geslacht;
     @Version
     private int version;
-
+    //20.2 VERZAMELING VALUE OBJECTEN MET EEN BASISTYPE
     @ElementCollection
     @CollectionTable(name = "bijnamen",
     joinColumns = @JoinColumn(name = "docentId") )

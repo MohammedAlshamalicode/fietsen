@@ -11,6 +11,7 @@ public class Campus {
     @Id
     private long id;
     private String naam;
+
     @Embedded
     private Adres adres;
 
